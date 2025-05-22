@@ -3,105 +3,649 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxury Cake Boutique | Artisan Confections</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap">
-    <link rel="stylesheet" href="style.css">
+    <title>Éclat Pâtisserie | Luxury Wedding Cakes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --ivory: #F9F5F0;
+            --taupe: #D8C4B6;
+            --rose: #E3B7A0;
+            --chocolate: #3A2D28;
+            --gold: #C6A969;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--chocolate);
+            background-color: var(--ivory);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.6s ease;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: var(--chocolate);
+            color: var(--ivory);
+        }
+
+        .dark-mode .navbar {
+            background-color: rgba(58, 45, 40, 0.95);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-color: var(--ivory);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .dark-mode .theme-toggle {
+            background-color: var(--gold);
+        }
+
+        .theme-toggle i {
+            font-size: 1.1rem;
+            color: var(--chocolate);
+            transition: var(--transition);
+        }
+
+        .dark-mode .theme-toggle i {
+            color: var(--ivory);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background-color: rgba(249, 245, 240, 0.95);
+            transition: all 0.5s ease;
+        }
+
+        .dark-mode .navbar {
+            background-color: rgba(58, 45, 40, 0.95);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            color: var(--chocolate);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .dark-mode .logo {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: var(--chocolate);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .dark-mode .nav-links a {
+            color: var(--taupe);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--gold);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--chocolate);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .dark-mode .hamburger {
+            color: var(--ivory);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0 5%;
+            margin-top: 80px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://raw.githubusercontent.com/Sithum0910/cake-1.0/main/file_00000000be186230aae3f3dcea4be5b9.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s 0.3s forwards;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s 0.5s forwards;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: var(--gold);
+            color: var(--chocolate);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 0;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s 0.7s forwards;
+        }
+
+        .btn:hover {
+            background-color: var(--rose);
+            transform: translateY(-3px);
+        }
+
+        /* About Section */
+        .about {
+            padding: 120px 5%;
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .about h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background-color: var(--gold);
+        }
+
+        .about p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .signature-cake {
+            flex: 1;
+            position: relative;
+            height: 500px;
+        }
+
+        .signature-cake img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            box-shadow: 20px 20px 0 var(--taupe);
+            transition: var(--transition);
+        }
+
+        .signature-cake:hover img {
+            transform: translate(-10px, -10px);
+            box-shadow: 30px 30px 0 var(--taupe);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 100px 5%;
+            background-color: var(--taupe);
+        }
+
+        .dark-mode .gallery {
+            background-color: #2a211d;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 120px 5%;
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 80px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .info-item i {
+            width: 40px;
+            height: 40px;
+            background-color: var(--gold);
+            color: var(--chocolate);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .dark-mode .info-item i {
+            color: var(--ivory);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--taupe);
+            color: var(--chocolate);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .dark-mode .social-links a {
+            background-color: #3a2d28;
+            color: var(--ivory);
+        }
+
+        .social-links a:hover {
+            background-color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--taupe);
+            background-color: transparent;
+            font-family: 'Montserrat', sans-serif;
+            transition: var(--transition);
+        }
+
+        .dark-mode .form-group input,
+        .dark-mode .form-group textarea {
+            border-color: var(--gold);
+            color: var(--ivory);
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 5%;
+            text-align: center;
+            background-color: var(--taupe);
+        }
+
+        .dark-mode footer {
+            background-color: #2a211d;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about, .contact-container {
+                flex-direction: column;
+                gap: 50px;
+            }
+
+            .signature-cake {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--ivory);
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                gap: 25px;
+                transform: translateY(-150%);
+                transition: var(--transition);
+            }
+
+            .dark-mode .nav-links {
+                background-color: var(--chocolate);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Dark Mode Toggle -->
-    <div class="theme-toggle">
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
         <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
     </div>
 
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="container">
-            <a href="#" class="logo">Gâteau Luxe</a>
-            <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#gallery">Gallery</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <button class="hamburger">
-                <i class="fas fa-bars"></i>
-            </button>
+        <a href="#" class="logo">Éclat</a>
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
         </div>
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
     </nav>
 
-    <!-- Hero Section with Parallax -->
-    <section id="home" class="hero">
-        <div class="parallax-bg" style="background-image: url('https://raw.githubusercontent.com/Sithum0910/cake-1.0/main/file_00000000be186230aae3f3dcea4be5b9.png')"></div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg" id="heroBg"></div>
         <div class="hero-content">
-            <h1>Luxury Artisan Cakes</h1>
-            <p>Exquisite confections for the most discerning palates</p>
-            <a href="#contact" class="btn">Request Consultation</a>
+            <h1>Artisan Cakes for Life's Sweetest Moments</h1>
+            <p>Exquisite, handcrafted wedding and specialty cakes made with premium ingredients and artistic precision.</p>
+            <a href="#contact" class="btn">Book a Consultation</a>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
+    <section class="about" id="about">
+        <div class="about-content">
             <h2>Our Philosophy</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>At Gâteau Luxe, we believe cakes should be works of art as much as culinary masterpieces. Our Paris-trained pastry chefs combine traditional techniques with innovative designs.</p>
-                    <div class="signature">
-                        <img src="https://raw.githubusercontent.com/Sithum0910/cake-1.0/main/10641187.jpg" alt="Signature cake">
-                        <p>Our signature Luxe Royale cake</p>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <div class="parallax-bg" style="background-image: url('images/baker.jpg')"></div>
-                </div>
-            </div>
+            <p>Éclat Pâtisserie was born from a passion for transforming simple ingredients into edible works of art. Our founder, trained at Le Cordon Bleu Paris, brings French techniques to modern cake design.</p>
+            <p>We believe in sustainable sourcing, using organic local ingredients whenever possible, and creating cakes that are as delicious as they are beautiful.</p>
+        </div>
+        <div class="signature-cake">
+            <img src="https://raw.githubusercontent.com/Sithum0910/cake-1.0/main/10641187.jpg" alt="Éclat Signature Cake">
         </div>
     </section>
 
     <!-- Gallery Section -->
-    <section id="gallery" class="gallery">
-        <div class="container">
-            <h2>Our Collections</h2>
-            <div class="gallery-grid">
-                <!-- JavaScript will populate this -->
-            </div>
+    <section class="gallery" id="gallery">
+        <div class="section-title">
+            <h2>Our Creations</h2>
+            <p>Each cake is a unique masterpiece, designed to reflect your personal style and celebration.</p>
+        </div>
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Gallery items will be added by JavaScript -->
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
+    <section class="contact" id="contact">
+        <div class="section-title">
             <h2>Contact Us</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Atelier Visits</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 1 Rue de Patisserie, Paris</p>
-                    <p><i class="fas fa-phone"></i> +33 1 23 45 67 89</p>
-                    <p><i class="fas fa-envelope"></i> contact@gateauluxe.com</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-pinterest"></i></a>
-                    </div>
+            <p>Ready to discuss your dream cake? We'd love to hear from you.</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Visit Our Studio</h3>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>123 Pâtisserie Avenue, Paris</p>
                 </div>
-                <form class="contact-form" id="contactForm">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <input type="tel" name="phone" placeholder="Phone Number">
-                    <textarea name="message" placeholder="Your Message" required></textarea>
-                    <button type="submit" class="btn">Send Enquiry</button>
-                </form>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <p>+33 1 23 45 67 89</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>contact@eclat.com</p>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
             </div>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Phone Number">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Tell us about your event and cake vision" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
-        <div class="container">
-            <p>&copy; 2023 Gâteau Luxe. All rights reserved.</p>
-        </div>
+        <p>&copy; 2023 Éclat Pâtisserie. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const moonIcon = themeToggle.querySelector('.fa-moon');
+
+        // Check for saved theme preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            moonIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                moonIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                moonIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
+        // Mobile Navigation
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Parallax Effect
+        const heroBg = document.getElementById('heroBg');
+
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            heroBg.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+        });
+
+        // Gallery Data
+        const cakes = [
+            { id: 1, name: "Blush Romance", image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1089&q=80" },
+            { id: 2, name: "Golden Elegance", image: "https://images.unsplash.com/photo-1552689486-f6773047d19f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" },
+            { id: 3, name: "Classic Vanilla", image: "https://images.unsplash.com/photo-1562440499-64c9a111f713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" },
+            { id: 4, name: "Chocolate Symphony", image: "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80
