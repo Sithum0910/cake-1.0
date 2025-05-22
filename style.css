@@ -324,3 +324,46 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+/* Variables */
+:root {
+    --primary: #ff6b6b;
+    --secondary: #ffa3a3;
+    --dark: #333;
+    --light: #f8f9fa;
+    --white: #fff;
+    --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background-image: url('https://raw.githubusercontent.com/Sithum0910/cake-1.0/refs/heads/main/file_00000000be186230aae3f3dcea4be5b9.png');
+    background-size: cover;
+    background-attachment: scroll;
+    background-position: center 0px;
+    background-repeat: no-repeat;
+    transition: background-position 0.2s ease-out;
+    animation: scrollFade 1.5s ease-in-out;
+}
+
+/* Scroll animation */
+@keyframes scrollFade {
+    0% {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* --- Keep rest of your styles here (navbar, hero, about, gallery, etc) --- */
