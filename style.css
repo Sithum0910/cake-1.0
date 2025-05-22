@@ -324,7 +324,6 @@ footer {
         grid-template-columns: 1fr;
     }
 }
-body {
   background-image: url('https://raw.githubusercontent.com/Sithum0910/cake-1.0/refs/heads/main/file_00000000be186230aae3f3dcea4be5b9.png');
   background-size: cover;
   background-attachment: fixed;
