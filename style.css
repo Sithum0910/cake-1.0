@@ -346,7 +346,7 @@ body {
     line-height: 1.6;
     color: var(--dark);
     background-image: url('https://raw.githubusercontent.com/Sithum0910/cake-1.0/refs/heads/main/file_00000000be186230aae3f3dcea4be5b9.png');
-    background-size: auto 1000px; /* shrink visible height */
+    background-size: auto 900px; /* shrink visible height */
     background-attachment: scroll;
     background-position: center 0;
     background-repeat: no-repeat;
