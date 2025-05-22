@@ -365,5 +365,42 @@ body {
         transform: scale(1);
     }
 }
+.contact-form {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  max-width: 600px;
+  margin: auto;
+}
+
+.contact-form .form-group {
+  margin-bottom: 1.2rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+}
+
+.contact-form button.btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+}
 
 /* --- Keep rest of your styles here (navbar, hero, about, gallery, etc) --- */
