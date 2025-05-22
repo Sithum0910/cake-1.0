@@ -1,56 +1,209 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cake Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
+  <title>Butter&Batter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: #fff8f6;
+      color: #333;
+    }
+    header {
+      background: #ffb6b9;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-family: 'Pacifico', cursive;
+      font-size: 2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      background: #ffe2e2;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    section {
+      padding: 2rem;
+      animation: fadeIn 0.8s ease-in;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 0.7rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #ffb6b9;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    footer {
+      background: #ffb6b9;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+    .admin-panel {
+      background: #fff0f0;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+    }
+    .admin-panel input {
+      margin-bottom: 0.5rem;
+    }
+    .social-icons i {
+      margin: 0 10px;
+      font-size: 1.5rem;
+      color: white;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
   <header>
-    <div class="logo">Cake Delights</div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    <i class="fas fa-birthday-cake"></i> Cake Creations
   </header>
-
-  <section id="home" class="section home">
-    <h1>Welcome to Cake Delights</h1>
-    <p>Custom cakes made with love and passion</p>
-  </section>
-
-  <section id="about" class="section about">
+  <nav>
+    <a href="#home"><i class="fas fa-home"></i> Home</a>
+    <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+    <a href="#projects"><i class="fas fa-images"></i> Cakes</a>
+    <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="#admin"><i class="fas fa-user-shield"></i> Admin</a>
+  </nav>  <section id="home">
+    <h2>Welcome to Cake Creations!</h2>
+    <p>We bake happiness into every slice. Discover our latest designs and sweet inspirations below.</p>
+  </section>  <section id="about">
     <h2>About Us</h2>
-    <p>We bake delicious and beautiful cakes for all occasions.</p>
-  </section>
-
-  <section id="gallery" class="section gallery">
-    <h2>Our Creations</h2>
-    <div class="image-grid">
-      <img src="https://via.placeholder.com/300" alt="Cake 1">
-      <img src="https://via.placeholder.com/300" alt="Cake 2">
-      <img src="https://via.placeholder.com/300" alt="Cake 3">
-    </div>
-  </section>
-
-  <section id="contact" class="section contact">
+    <p>We specialize in making delicious, personalized cakes for weddings, birthdays, and all special occasions. Each creation is crafted with love and creativity.</p>
+  </section>  <section id="projects">
+    <h2>Our Cake Projects</h2>
+    <div class="gallery" id="cakeGallery"></div>
+  </section>  <section id="contact">
     <h2>Contact Us</h2>
-    <form id="contact-form">
+    <form>
       <input type="text" placeholder="Your Name" required />
       <input type="email" placeholder="Your Email" required />
-      <textarea placeholder="Your Message" required></textarea>
-      <button type="submit">Send</button>
+      <textarea rows="4" placeholder="Your Message"></textarea>
+      <button type="submit"><i class="fas fa-paper-plane"></i> Send</button>
     </form>
-  </section>
+  </section>  <section id="admin" class="admin-panel">
+    <h2>Admin Panel</h2>
+    <input type="text" placeholder="Username" id="adminUser" />
+    <input type="password" placeholder="Password" id="adminPass" />
+    <button onclick="loginAdmin()"><i class="fas fa-sign-in-alt"></i> Login</button>
+    <div id="adminControls" style="display: none;">
+      <input type="text" id="imageURL" placeholder="Image URL">
+      <button onclick="addImage()"><i class="fas fa-plus"></i> Add Cake</button>
+      <div class="gallery" id="adminGallery"></div>
+    </div>
+  </section>  <footer>
+    <p>&copy; 2025 Cake Creations</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+  </footer>  <script>
+    let imageList = [];
 
-  <footer>
-    <p>&copy; 2025 Cake Delights</p>
-  </footer>
-</body>
-</html>
+    function saveImages() {
+      localStorage.setItem("cakeImages", JSON.stringify(imageList));
+    }
+
+    function loadImages() {
+      const stored = JSON.parse(localStorage.getItem("cakeImages"));
+      imageList = stored || [];
+    }
+
+    function renderGallery() {
+      const gallery = document.getElementById('cakeGallery');
+      gallery.innerHTML = imageList.map((url, index) => `<img src="${url}" alt="Cake ${index+1}" />`).join('');
+    }
+
+    function renderAdminGallery() {
+      const adminGallery = document.getElementById('adminGallery');
+      adminGallery.innerHTML = imageList.map((url, index) => `
+        <div>
+          <img src="${url}" style="width:100%; border-radius:8px;" />
+          <button onclick="removeImage(${index})"><i class='fas fa-trash'></i> Delete</button>
+        </div>
+      `).join('');
+    }
+
+    function addImage() {
+      const url = document.getElementById('imageURL').value;
+      if (url) {
+        imageList.push(url);
+        saveImages();
+        renderGallery();
+        renderAdminGallery();
+        document.getElementById('imageURL').value = '';
+      }
+    }
+
+    function removeImage(index) {
+      imageList.splice(index, 1);
+      saveImages();
+      renderGallery();
+      renderAdminGallery();
+    }
+
+    function loginAdmin() {
+      const user = document.getElementById('adminUser').value;
+      const pass = document.getElementById('adminPass').value;
+
+      if (user === 'admin' && pass === 'cakeadmin123') {
+        document.getElementById('adminControls').style.display = 'block';
+        renderAdminGallery();
+      } else {
+        alert('Invalid login.');
+      }
+    }
+
+    loadImages();
+    renderGallery();
+  </script></body>
+  </html>
