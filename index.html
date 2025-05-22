@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cake Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: #fff8f6;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: #ffb6b9;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-family: 'Pacifico', cursive;
+      font-size: 2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1rem;
+      background: #ffe2e2;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+    section {
+      padding: 2rem;
+      animation: fadeIn 1s ease-in;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #ffb6b9;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    footer {
+      background: #ffb6b9;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+    .admin-panel {
+      background: #fff0f0;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+    }
+    .admin-panel input {
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>Cake Creations</header>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>  <section id="home">
+    <h2>Welcome to Cake Creations!</h2>
+    <p>We bake happiness into every cake. Explore our delicious creations below.</p>
+  </section>  <section id="gallery">
+    <h2>Our Cakes</h2>
+    <div class="gallery" id="cakeGallery"></div>
+  </section>  <section id="about">
+    <h2>About Us</h2>
+    <p>We are passionate bakers with a love for unique, custom cakes for all occasions. Let us sweeten your day!</p>
+  </section>  <section id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea rows="5" placeholder="Your Message"></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>  <section id="admin" class="admin-panel">
+    <h2>Admin Panel</h2>
+    <input type="password" placeholder="Enter admin password" id="adminPass" />
+    <div id="adminControls" style="display: none;">
+      <input type="text" id="imageURL" placeholder="Cake Image URL">
+      <button onclick="addImage()">Add Cake</button>
+      <div class="gallery" id="adminGallery"></div>
+    </div>
+  </section>  <footer>
+    &copy; 2025 Cake Creations. All rights reserved.
+  </footer>  <script>
+    const imageList = [];
+
+    function renderGallery() {
+      const gallery = document.getElementById('cakeGallery');
+      gallery.innerHTML = imageList.map((url, index) => `<img src="${url}" alt="Cake ${index + 1}"/>`).join('');
+    }
+
+    function renderAdminGallery() {
+      const adminGallery = document.getElementById('adminGallery');
+      adminGallery.innerHTML = imageList.map((url, index) => `
+        <div>
+          <img src="${url}" style="width:100%" />
+          <button onclick="removeImage(${index})">Remove</button>
+        </div>
+      `).join('');
+    }
+
+    function addImage() {
+      const url = document.getElementById('imageURL').value;
+      if (url) {
+        imageList.push(url);
+        renderGallery();
+        renderAdminGallery();
+        document.getElementById('imageURL').value = '';
+      }
+    }
+
+    function removeImage(index) {
+      imageList.splice(index, 1);
+      renderGallery();
+      renderAdminGallery();
+    }
+
+    document.getElementById('adminPass').addEventListener('change', function() {
+      if (this.value === 'cakeadmin123') {
+        document.getElementById('adminControls').style.display = 'block';
+        renderAdminGallery();
+      } else {
+        alert('Wrong password');
+      }
+    });
+
+    // Load sample cakes
+    imageList.push(
+      'https://images.unsplash.com/photo-1604335399108-23b510bb01c7',
+      'https://images.unsplash.com/photo-1589308078050-aa3dfd37ad47'
+    );
+    renderGallery();
+  </script></body>
+</html>
