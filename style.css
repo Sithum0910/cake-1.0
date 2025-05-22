@@ -1,173 +1,19 @@
-/* Luxury Color Scheme */
-:root {
-    --primary: #d4af37; /* Gold */
-    --secondary: #a67c52; /* Bronze */
-    --dark: #1a1a1a;
-    --light: #f5f5f5;
-    --white: #ffffff;
-    --text-dark: #333;
-    --text-light: #f8f8f8;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-/* Dark Mode Colors */
-[data-theme="dark"] {
-    --dark: #f5f5f5;
-    --light: #1a1a1a;
-    --text-dark: #f8f8f8;
-    --text-light: #333;
-    --white: #121212;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
 body {
-    font-family: 'Montserrat', sans-serif;
-    color: var(--text-dark);
-    background: var(--light);
-    transition: var(--transition);
+  background-image: url('https://raw.githubusercontent.com/Sithum0910/cake-1.0/refs/heads/main/file_00000000be186230aae3f3dcea4be5b9.png');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: scrollFade 5s ease-in-out;
 }
 
-h1, h2, h3, .logo {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-}
-
-/* Theme Toggle */
-.theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-    background: var(--white);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-}
-
-.theme-toggle i {
-    position: absolute;
-    transition: var(--transition);
-    font-size: 1.2rem;
-}
-
-.fa-moon {
-    opacity: 1;
-    color: var(--dark);
-}
-
-.fa-sun {
+@keyframes scrollFade {
+  0% {
     opacity: 0;
-    color: var(--primary);
-}
-
-[data-theme="dark"] .fa-moon {
-    opacity: 0;
-}
-
-[data-theme="dark"] .fa-sun {
+    transform: scale(1.05);
+  }
+  100% {
     opacity: 1;
+    transform: scale(1);
+  }
 }
-
-/* Parallax Effect */
-.parallax-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    z-index: -1;
-    transition: transform 0.1s linear;
-}
-
-.hero {
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
-    color: var(--text-light);
-    display: flex;
-    align-items: center;
-    text-align: center;
-}
-
-.hero::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-}
-
-.hero-content {
-    position: relative;
-    z-index: 1;
-}
-
-/* Signature Image Placement */
-.signature {
-    margin: 2rem 0;
-    text-align: center;
-}
-
-.signature img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    margin-bottom: 1rem;
-}
-
-/* Enhanced Animations */
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0px); }
-}
-
-.gallery-item:hover {
-    animation: float 3s ease-in-out infinite;
-}
-
-/* Luxury Button Styles */
-.btn {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: var(--text-light);
-    padding: 1rem 2.5rem;
-    border: none;
-    border-radius: 0;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 600;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--secondary), var(--primary));
-    transition: var(--transition);
-    z-index: -1;
-}
-
-.btn:hover::before {
-    left: 0;
-}
-
-/* Rest of your existing CSS remains, just add these enhancements */
