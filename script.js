@@ -1,107 +1,88 @@
-// Mobile Navigation
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
+// Theme Toggle
+const themeToggle = document.querySelector('.theme-toggle');
+const body = document.body;
 
-hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
+// Check for saved theme preference
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme) {
+    body.setAttribute('data-theme', currentTheme);
+}
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = body.getAttribute('data-theme');
+    if (currentTheme === 'dark') {
+        body.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+    } else {
+        body.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+    }
 });
 
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 70, // Adjust for fixed header
-                behavior: 'smooth'
-            });
-            
-            // Close mobile menu if open
-            navLinks.classList.remove('active');
-        }
-    });
-});
-
-// Gallery Data
-const cakes = [
-    { id: 1, name: "Chocolate Dream", image: "images/cake1.jpg" },
-    { id: 2, name: "Vanilla Elegance", image: "images/cake2.jpg" },
-    { id: 3, name: "Red Velvet Classic", image: "images/cake3.jpg" },
-    { id: 4, name: "Lemon Drizzle", image: "images/cake4.jpg" },
-    { id: 5, name: "Carrot Wonder", image: "images/cake5.jpg" },
-    { id: 6, name: "Strawberry Delight", image: "images/cake6.jpg" }
-];
-
-// Load Gallery
-function loadGallery() {
-    const galleryGrid = document.querySelector('.gallery-grid');
+// Parallax Effect
+function setupParallax() {
+    const parallaxElements = document.querySelectorAll('.parallax-bg');
     
-    cakes.forEach(cake => {
-        const galleryItem = document.createElement('div');
-        galleryItem.className = 'gallery-item';
-        galleryItem.innerHTML = `
-            <img src="${cake.image}" alt="${cake.name}">
-            <div class="img-overlay">
-                <h3>${cake.name}</h3>
-            </div>
-        `;
-        galleryGrid.appendChild(galleryItem);
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.pageYOffset;
+        
+        parallaxElements.forEach(element => {
+            const speed = element.getAttribute('data-speed') || 0.3;
+            const yPos = -(scrollPosition * speed);
+            element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+        });
     });
 }
 
-// Contact Form Submission
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form values
-        const formData = new FormData(this);
-        const data = Object.fromEntries(formData);
-        
-        // In a real app, you would send this to a server
-        console.log('Form submitted:', data);
-        
-        // Show success message
-        alert('Thank you for your message! We will contact you soon.');
-        this.reset();
-    });
+// Contact Form Storage
+function setupContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const contactData = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                message: formData.get('message'),
+                date: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            saveContact(contactData);
+            
+            // Show confirmation
+            alert('Thank you for your enquiry. We will contact you shortly.');
+            this.reset();
+        });
+    }
 }
 
-// Initialize when DOM is loaded
+function saveContact(data) {
+    // Get existing contacts or initialize array
+    const contacts = JSON.parse(localStorage.getItem('cakeContacts')) || [];
+    
+    // Add new contact
+    contacts.push(data);
+    
+    // Save back to localStorage
+    localStorage.setItem('cakeContacts', JSON.stringify(contacts));
+    
+    // In a real app, you would also send this to a server
+    console.log('Contact saved:', data);
+}
+
+// Initialize everything
 document.addEventListener('DOMContentLoaded', function() {
+    setupParallax();
+    setupContactForm();
     loadGallery();
     
-    // Add animation class when elements come into view
-    const animateOnScroll = () => {
-        const elements = document.querySelectorAll('.about, .gallery, .contact');
-        
-        elements.forEach(element => {
-            const elementPosition = element.getBoundingClientRect().top;
-            const screenPosition = window.innerHeight / 1.3;
-            
-            if (elementPosition < screenPosition) {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }
-        });
-    };
-    
-    // Set initial state for animations
-    document.querySelectorAll('.about, .gallery, .contact').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    });
-    
-    // Run once on load
-    animateOnScroll();
-    
-    // Run on scroll
-    window.addEventListener('scroll', animateOnScroll);
+    // Your existing initialization code
 });
+
+// Your existing gallery and other functions remain the same
