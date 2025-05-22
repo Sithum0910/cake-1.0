@@ -110,14 +110,22 @@
                         <a href="#"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
-                <form action="https://formspree.io/f/xpwdejng" method="POST" class="contact-form">
-                <form class="contact-form" id="contactForm">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <input type="tel" placeholder="Phone Number">
-                    <textarea placeholder="Your Message" required></textarea>
-                    <button type="submit" class="btn">Send Message</button>
-                </form>
+                <!-- Modern Contact Form with Formspree -->
+<form action="https://formspree.io/f/yourFormID" method="POST" class="contact-form">
+  <div class="form-group">
+    <input type="text" name="name" placeholder="Full Name" required>
+  </div>
+  <div class="form-group">
+    <input type="email" name="email" placeholder="Email Address" required>
+  </div>
+  <div class="form-group">
+    <input type="tel" name="phone" placeholder="Phone (optional)">
+  </div>
+  <div class="form-group">
+    <textarea name="message" placeholder="Type your message..." rows="5" required></textarea>
+  </div>
+  <button type="submit" class="btn">Send Message</button>
+</form>
             </div>
         </div>
     </section>
