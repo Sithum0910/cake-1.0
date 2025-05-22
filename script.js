@@ -97,10 +97,9 @@ document.addEventListener('DOMContentLoaded', function() {
     animateOnScroll();
     
     // Run on scroll
-    window.addEventListener('scroll', animateOnScroll);
     window.addEventListener('scroll', function () 
                             {
     const scrollY = window.scrollY;
     document.body.style.backgroundPosition = `center ${scrollY * 0.5}px`;
-});
+
 });
