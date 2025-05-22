@@ -29,14 +29,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Gallery Data
-const cakes = [
-    { id: 1, name: "Chocolate Dream", image: "images/cake1.jpg" },
-    { id: 2, name: "Vanilla Elegance", image: "images/cake2.jpg" },
-    { id: 3, name: "Red Velvet Classic", image: "images/cake3.jpg" },
-    { id: 4, name: "Lemon Drizzle", image: "images/cake4.jpg" },
-    { id: 5, name: "Carrot Wonder", image: "images/cake5.jpg" },
-    { id: 6, name: "Strawberry Delight", image: "images/cake6.jpg" }
-];
+
 
 // Load Gallery
 function loadGallery() {
