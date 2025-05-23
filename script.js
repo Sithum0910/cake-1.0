@@ -112,3 +112,73 @@ document.addEventListener("DOMContentLoaded", () => {
     navLinks.classList.toggle("active");
 
 });
+
+// Mobile Navigation
+document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+
+    // Toggle mobile menu
+    hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70, // Adjust for fixed header
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Scroll animation for sections
+    const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.about, .gallery, .contact, .hero-content');
+        
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if (elementPosition < screenPosition) {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }
+        });
+    };
+    
+    // Set initial state for animations
+    document.querySelectorAll('.about, .gallery, .contact, .hero-content').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+    
+    // Run once on load
+    animateOnScroll();
+    
+    // Run on scroll
+    window.addEventListener('scroll', () => {
+        animateOnScroll();
+        
+        // Parallax effect for background
+        const scrollY = window.scrollY;
+        document.body.style.backgroundPosition = `center ${scrollY * 0.5}px`;
+    });
+});
