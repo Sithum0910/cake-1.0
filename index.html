@@ -530,5 +530,30 @@
             });
         });
     </script>
+<section class="image-section">
+  <img
+    src="https://raw.githubusercontent.com/Sithum0910/mirasdivinecakes/refs/heads/main/images/colorful-french-macaron-makaruny-fon-colors%20(1).jpg"
+    alt="Colorful Macarons"
+    class="scroll-image"
+  />
+</section>
+    <script>
+  const image = document.querySelector('.scroll-image');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          image.classList.add('visible');
+        }
+      });
+    },
+    {
+      threshold: 0.3,
+    }
+  );
+
+  observer.observe(image);
+</script>
 </body>
 </html>
