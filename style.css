@@ -435,5 +435,55 @@ body {
   .hamburger {
     display: block;
   }
+}/* Update the mobile menu styles */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background-color: var(--white);
+        width: 200px;
+        padding: 1rem;
+        box-shadow: var(--shadow);
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .hamburger {
+        display: block;
+        z-index: 1000;
+    }
 }
+
+/* Add animation classes */
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add this to make sure the menu is above other content */
+.navbar {
+    z-index: 1000;
+}
+
 /* --- Keep rest of your styles here (navbar, hero, about, gallery, etc) --- */
