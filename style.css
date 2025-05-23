@@ -436,4 +436,26 @@ body {
     display: block;
   }
 }
+.image-section {
+  padding: 50px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #fff; /* or your section background */
+}
+
+.scroll-image {
+  max-width: 90%;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease-in-out;
+}
+
+.scroll-image.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 /* --- Keep rest of your styles here (navbar, hero, about, gallery, etc) --- */
