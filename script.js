@@ -103,12 +103,3 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.style.backgroundPosition = `center ${scrollY * 0.5}px`;
 
 });
-// script.js
-document.addEventListener("DOMContentLoaded", () => {
-  const hamburger = document.querySelector(".hamburger");
-  const navLinks = document.querySelector(".nav-links");
-
-  hamburger.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
-
-});
