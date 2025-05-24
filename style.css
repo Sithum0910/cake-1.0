@@ -15,12 +15,8 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: var(--dark);
-    background: var(--light);
-}
+/* The primary body styling is now handled by the more detailed rule below,
+   which includes the background image and animations. */
 
 .container {
     width: 90%;
@@ -241,21 +237,7 @@ body {
     color: var(--primary);
 }
 
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-family: inherit;
-}
-
-.contact-form textarea {
-    height: 150px;
-    resize: vertical;
-}
-
+/* The more detailed .contact-form styles appearing later will be kept. */
 /* Footer */
 footer {
     background: var(--dark);
@@ -292,25 +274,8 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background: var(--white);
-        padding: 1rem;
-        box-shadow: var(--shadow);
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .hamburger {
-        display: block;
-    }
+    /* This media query block contains general responsive rules. */
+    /* Nav-related responsive rules are handled in a separate media query block later. */
 
     .hero h1 {
         font-size: 2.5rem;
@@ -324,32 +289,14 @@ footer {
         grid-template-columns: 1fr;
     }
 }
-/* Variables */
-:root {
-    --primary: #ff6b6b;
-    --secondary: #ffa3a3;
-    --dark: #333;
-    --light: #f8f9fa;
-    --white: #fff;
-    --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-}
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* Merged body properties */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--dark);
-    background-image: url('https://raw.githubusercontent.com/Sithum0910/cake-1.0/refs/heads/main/file_00000000be186230aae3f3dcea4be5b9.png');
-    background-size: auto 800px; /* shrink visible height */
-    background-attachment: scroll;
-    background-position: center 0;
-    background-repeat: no-repeat;
+    background: var(--light) url('https://raw.githubusercontent.com/Sithum0910/cake-1.0/refs/heads/main/file_00000000be186230aae3f3dcea4be5b9.png') no-repeat center 0 / auto 800px;
+    background-attachment: scroll; /* Explicitly scroll */
     transition: background-position 0.2s ease-out;
     animation: scrollFade 1.5s ease-in-out;
 }
@@ -402,37 +349,30 @@ body {
   font-size: 1.1rem;
   border-radius: 8px;
 }
-/* style.css */
-.nav-links {
-  display: flex;
-  gap: 1rem;
-}
 
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-}
+/* Consolidating .nav-links and .hamburger styles.
+   The initial definitions earlier in the file are more complete.
+   The following media query block handles nav responsiveness. */
 
 @media (max-width: 768px) {
   .nav-links {
-    display: none;
+    display: none; /* Hidden by default on mobile */
     flex-direction: column;
     position: absolute;
-    top: 60px;
-    right: 0;
-    background-color: #fff;
-    width: 200px;
+    top: 70px; /* Adjusted for navbar height */
+    left: 0;   /* Full width dropdown starts from left */
+    width: 100%;
+    background: var(--white); /* Use CSS variable for background */
     padding: 1rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    box-shadow: var(--shadow); /* Use CSS variable for shadow */
   }
 
   .nav-links.active {
-    display: flex;
+    display: flex; /* Show when active */
+    z-index: 1001; /* Ensure it's above the navbar (z-index: 1000) */
   }
 
-  .hamburger {
+  .hamburger { /* This rule is fine, ensures hamburger is shown on mobile */
     display: block;
   }
 }
